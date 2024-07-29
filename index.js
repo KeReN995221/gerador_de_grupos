@@ -1,55 +1,46 @@
-/*var nome="Keren";
-var nome="Wesley";
-
-console.log(nome);
-
-let sobrenome="Wiliam";
-
-const pessoa={nome:"José", idade:30};
-console.log(pessoa);
-
-console.log(typeof nome);
-
-console.log(nome);
-var nome="Keren";
-
-
-for (let x=0, y=9; x<10; x++, y--){
-    console.log("x: "+x+" Y: "+y);
-}
-
-function somar(val1, val2){
-    return val1+val2;
+function gerarGrupos(lista, num, tamanho) {
+    let quantidadeGrupos = Math.ceil(tamanho / num);
+    let grupos = [];
+    
+    for (let i = 0; i < quantidadeGrupos; i++) {
+        let grupo = lista.splice(0, num);
+        grupos.push(grupo);
+    }
+    
+    return grupos;
 }
 
 
-const somar2 = (val1, val2)=>val1-val2;
+function gerar(){
+    let nomes = document.getElementById("lista_nomes").value;
+    let num = document.getElementById("num_people_for_group").value;
+    let lista = nomes.split(",");
+    var tamanho = lista.length; 
+    Array.isArray(lista);
+    
+    if(tamanho % num !== 0){
+        var erro = "Não é possível criar os grupos pois não é possivel dividir a quantidade de pessoas informadas pelo numero de pessoas por grupo desejado!";
+        document.getElementById("grupos").innerText=erro;
+        navigator.clipboard.writeText(erro);
+        return;
+    }else{
+        var i, num_aleatorio, aux_list;
+        for(i = tamanho; i;){
+            num_aleatorio = Math.random() * i-- | 0;
+            aux_list = lista[num_aleatorio];
+            lista[num_aleatorio] = lista[i];
+            lista[i] = aux_list;
+                      
+        } 
 
-console.log(somar2(10,5));
+        var grupos = gerarGrupos(lista, num, tamanho);
+        grupos.forEach((grupo, index) => {
+            console.log(`Grupo ${index + 1}: ${grupo.join(', ')}`);
+        });
+    }
 
-let frutas= ['maça', 'banana', 'batata'];
-console.log(frutas[1]);
-frutas.push("Laranja");
-frutas.forEach(fruta=>console.log(fruta));
-frutas.map((fruta, idx)=>console.log(fruta +" ["+idx+" ]"));
+     
 
-
-
-let titulo1 = document.getElementById("h1");
-console.log(titulo1);
-
-let meulink = document.getElementById("titulo");
-meulink.setAttribute("herf", "https://oul.com.br");
-*/
-let inputNum1 = document.getElementById("num1");
-//inputNum1.addEventListener('mouseover', function(){alert('olá')}); // eventos para mostrar alerta na página
-
-function somar(){
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
-    debugger;
-    let resultado =  parseFloat(num1)+parseFloat(num2);
-    document.getElementById("resultado").innerText=resultado;
-
-    navigator.clipboard.writeText(resultado);
 }
+    
+
